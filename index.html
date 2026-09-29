@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syntropic Labs — Quantitative Research & Market Microstructure Laboratories</title>
+  <meta name="description" content="Syntropic Labs is an institutional quantitative research and algorithmic infrastructure laboratory specializing in continuous-time stochastic control, AMM invariant geometry, and sub-microsecond market microstructure.">
+  <meta name="keywords" content="quantitative finance, market microstructure, algorithmic trading, AMM invariants, order flow imbalance, ergodicity economics, stochastic calculus, DeFi tokenomics">
+  
+  <!-- OpenGraph / Social Cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Syntropic Labs — Quantitative Research Laboratories">
+  <meta property="og:description" content="Engineering Order from Market Entropy. Institutional quantitative finance, invariant surface geometry, and high-frequency execution infrastructure.">
+  <meta property="og:image" content="assets/brand/hero-manifold.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/brand/logo.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cyan: '#0df2c8',
+              blue: '#38bdf8',
+              dark: '#07090e',
+              slate: '#0c1017',
+              card: '#0f172a'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- KaTeX for authentic mathematical rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-[#07090e] text-slate-100 antialiased selection:bg-brand-cyan selection:text-black">
+
+  <!-- =========================================================================
+       UNIFIED STICKY TOP BAR (LIVE TICKER + INSTITUTIONAL NAVIGATION)
+       ========================================================================= -->
+  <div class="sticky top-0 z-50 w-full backdrop-blur-xl bg-[#07090e]/95 border-b border-white/[0.08]">
+    <!-- 1. LIVE MARKET MICROSTRUCTURE TICKER BAR -->
+    <aside aria-label="Live Market Telemetry" class="border-b border-white/[0.06] bg-[#090c12]/80 text-xs py-1.5 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        
+        <!-- Live Engine Status Badge -->
+        <div class="flex items-center space-x-2 shrink-0">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 live-pulse-dot"></span>
+          <span class="font-mono text-slate-300 uppercase tracking-wider text-[11px] font-semibold">QUANT ENGINE ONLINE</span>
+          <span class="text-slate-600">|</span>
+          <span class="font-mono text-slate-400 text-[11px]">LATENCY:</span>
+          <span class="tick-latency-val font-mono text-cyan-400 font-semibold text-[11px]">0.38μs</span>
+        </div>
+
+        <!-- Seamless Infinite Scrolling Ticker Track -->
+        <div class="overflow-hidden flex-1 relative mask-fade-edges min-w-0">
+          <div class="ticker-track flex items-center gap-8">
+            <!-- Set 1 -->
+            <div class="tick-btc flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">BTC/USD:</span>
+              <span class="font-mono text-white font-medium">$94,824.50</span>
+              <span class="text-xs font-mono text-emerald-400">▲ +1.84%</span>
+              <span class="text-xs font-mono text-slate-500">| OFI: <span class="text-emerald-400">+0.24</span></span>
+            </div>
+
+            <div class="tick-eth flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">ETH/USD:</span>
+              <span class="font-mono text-white font-medium">$3,418.20</span>
+              <span class="text-xs font-mono text-emerald-400">▲ +2.15%</span>
+              <span class="text-xs font-mono text-slate-500">| OFI: <span class="text-emerald-400">+0.18</span></span>
+            </div>
+
+            <div class="tick-sol flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">SOL/USD:</span>
+              <span class="font-mono text-white font-medium">$198.75</span>
+              <span class="text-xs font-mono text-emerald-400">▲ +4.32%</span>
+              <span class="text-xs font-mono text-slate-500">| OFI: <span class="text-emerald-400">+0.42</span></span>
+            </div>
+
+            <div class="flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">SHARPE (LTM):</span>
+              <span class="font-mono text-cyan-300 font-medium">3.84 NET</span>
+              <span class="text-xs font-mono text-slate-500">| MAX DD: <span class="text-emerald-400">-2.14%</span></span>
+            </div>
+
+            <div class="flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">INVARIANT DRIFT:</span>
+              <span class="font-mono text-cyan-300 font-medium">0.00012σ</span>
+              <span class="text-xs font-mono text-emerald-400">LVR HEDGED</span>
+            </div>
+
+            <!-- Set 2 (Exact Duplicate for Continuous Loop) -->
+            <div class="tick-btc flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">BTC/USD:</span>
+              <span class="font-mono text-white font-medium">$94,824.50</span>
+              <span class="text-xs font-mono text-emerald-400">▲ +1.84%</span>
+              <span class="text-xs font-mono text-slate-500">| OFI: <span class="text-emerald-400">+0.24</span></span>
+            </div>
+
+            <div class="tick-eth flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">ETH/USD:</span>
+              <span class="font-mono text-white font-medium">$3,418.20</span>
+              <span class="text-xs font-mono text-emerald-400">▲ +2.15%</span>
+              <span class="text-xs font-mono text-slate-500">| OFI: <span class="text-emerald-400">+0.18</span></span>
+            </div>
+
+            <div class="tick-sol flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">SOL/USD:</span>
+              <span class="font-mono text-white font-medium">$198.75</span>
+              <span class="text-xs font-mono text-emerald-400">▲ +4.32%</span>
+              <span class="text-xs font-mono text-slate-500">| OFI: <span class="text-emerald-400">+0.42</span></span>
+            </div>
+
+            <div class="flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">SHARPE (LTM):</span>
+              <span class="font-mono text-cyan-300 font-medium">3.84 NET</span>
+              <span class="text-xs font-mono text-slate-500">| MAX DD: <span class="text-emerald-400">-2.14%</span></span>
+            </div>
+
+            <div class="flex items-center space-x-2 shrink-0">
+              <span class="text-slate-400 font-mono">INVARIANT DRIFT:</span>
+              <span class="font-mono text-cyan-300 font-medium">0.00012σ</span>
+              <span class="text-xs font-mono text-emerald-400">LVR HEDGED</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Quick Link -->
+        <div class="hidden md:flex items-center shrink-0">
+          <a href="#papers" class="text-cyan-400 hover:text-white transition font-mono text-[11px] flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+            <i data-lucide="file-text" class="w-3 h-3"></i> Research Series
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 2. PRIMARY INSTITUTIONAL HEADER & NAVIGATION -->
+    <header class="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group shrink-0">
+        <div class="w-9 h-9 relative flex items-center justify-center p-1 rounded-xl bg-slate-900/90 border border-white/10 group-hover:border-brand-cyan/60 transition shadow-lg shadow-cyan-950/40">
+          <img src="assets/brand/logo.svg" alt="Syntropic Labs Logo" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-bold text-base tracking-wider text-white font-sans">SYNTROPIC</span>
+            <span class="font-light text-base text-brand-cyan">LABS</span>
+          </div>
+          <div class="text-[9px] font-mono tracking-widest text-slate-500 uppercase -mt-0.5">
+            QUANTITATIVE RESEARCH
+          </div>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-xs xl:text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-brand-cyan transition">About</a>
+        <a href="#research" class="hover:text-brand-cyan transition">Research Pillars</a>
+        <a href="#infrastructure" class="hover:text-brand-cyan transition">Infrastructure</a>
+        <a href="#papers" class="hover:text-brand-cyan transition">Working Papers</a>
+        <a href="#team" class="hover:text-brand-cyan transition">Leadership</a>
+        <a href="#solutions" class="hover:text-brand-cyan transition">Institutional</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden sm:flex items-center shrink-0">
+        <button class="trigger-contact px-4 py-2 text-xs font-mono font-semibold text-black bg-brand-cyan hover:bg-white rounded-lg transition shadow-lg shadow-brand-cyan/20 flex items-center gap-1.5">
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i> Contact Us
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <div class="lg:hidden flex items-center">
+        <button id="mobileMenuBtn" aria-label="Toggle mobile menu" class="p-2 text-slate-400 hover:text-white">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-white/5 bg-[#090c14] px-4 py-5 space-y-3">
+      <a href="#about" class="block text-slate-300 hover:text-brand-cyan font-medium text-sm">About</a>
+      <a href="#research" class="block text-slate-300 hover:text-brand-cyan font-medium text-sm">Research Pillars</a>
+      <a href="#infrastructure" class="block text-slate-300 hover:text-brand-cyan font-medium text-sm">Infrastructure</a>
+      <a href="#papers" class="block text-slate-300 hover:text-brand-cyan font-medium text-sm">Working Papers</a>
+      <a href="#team" class="block text-slate-300 hover:text-brand-cyan font-medium text-sm">Leadership</a>
+      <a href="#solutions" class="block text-slate-300 hover:text-brand-cyan font-medium text-sm">Institutional</a>
+      <div class="pt-3 border-t border-white/10">
+        <button class="trigger-contact w-full py-2.5 text-xs font-mono font-semibold text-center text-black bg-brand-cyan rounded-lg flex items-center justify-center gap-1.5">
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i> Contact Us
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3. HERO SECTION (INTERACTIVE MANIFOLD + HIGH-IMPACT BRANDING)
+       ========================================================================= -->
+  <section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-grid-pattern pt-12 pb-24">
+    <!-- Interactive Canvas Particle Field -->
+    <canvas id="manifoldCanvas"></canvas>
+    
+    <!-- Ambient Radial Glow -->
+    <div class="absolute inset-0 bg-radial-gradient pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <!-- Tag / Badge -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 text-cyan-300 text-xs font-mono mb-8 backdrop-blur-md">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-ping"></span>
+        <span>STOCHASTIC SYSTEMS · AMM INVARIANTS · SUB-MICROSECOND EXECUTION</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.08] mb-6">
+        Engineering Order from <br class="hidden sm:inline">
+        <span class="bg-gradient-to-r from-brand-cyan via-brand-blue to-indigo-400 bg-clip-text text-transparent">
+          Market Entropy.
+        </span>
+      </h1>
+
+      <!-- Subtitle Description -->
+      <p class="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto font-normal leading-relaxed mb-10">
+        Syntropic Labs is an institutional quantitative research and algorithmic infrastructure laboratory. 
+        We bridge continuous-time stochastic calculus, proprietary AMM bonding manifolds, 
+        and sub-microsecond execution systems across global digital asset venues.
+      </p>
+
+      <!-- Primary Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a href="#papers" class="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold text-black bg-brand-cyan hover:bg-white rounded-xl transition duration-200 shadow-xl shadow-cyan-950/60 flex items-center justify-center gap-2">
+          <i data-lucide="file-text" class="w-4 h-4"></i> Explore Working Papers
+        </a>
+        <button class="trigger-contact w-full sm:w-auto px-8 py-3.5 text-sm font-semibold text-white bg-slate-900/90 hover:bg-slate-800 rounded-xl border border-white/10 hover:border-cyan-400/50 transition duration-200 backdrop-blur-md flex items-center justify-center gap-2">
+          <i data-lucide="mail" class="w-4 h-4 text-brand-cyan"></i> Contact Us
+        </button>
+      </div>
+
+      <!-- Top-line Key Metrics Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto text-left">
+        <div class="glass-panel p-5 rounded-2xl border border-white/[0.07]">
+          <div class="text-slate-500 font-mono text-xs uppercase tracking-wider mb-1">Simulated Volume</div>
+          <div class="text-2xl sm:text-3xl font-bold font-mono text-white">$4.8B+</div>
+          <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+            <span class="text-emerald-400">✓</span> Multi-venue tick backtested
+          </div>
+        </div>
+
+        <div class="glass-panel p-5 rounded-2xl border border-white/[0.07]">
+          <div class="text-slate-500 font-mono text-xs uppercase tracking-wider mb-1">Core Latency</div>
+          <div class="text-2xl sm:text-3xl font-bold font-mono text-cyan-400">&lt; 14 μs</div>
+          <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+            <span class="text-emerald-400">✓</span> Rust DPDK kernel bypass
+          </div>
+        </div>
+
+        <div class="glass-panel p-5 rounded-2xl border border-white/[0.07]">
+          <div class="text-slate-500 font-mono text-xs uppercase tracking-wider mb-1">Simulated Sharpe</div>
+          <div class="text-2xl sm:text-3xl font-bold font-mono text-white">3.84</div>
+          <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+            <span class="text-emerald-400">✓</span> Net of adverse selection
+          </div>
+        </div>
+
+        <div class="glass-panel p-5 rounded-2xl border border-white/[0.07]">
+          <div class="text-slate-500 font-mono text-xs uppercase tracking-wider mb-1">Working Papers</div>
+          <div class="text-2xl sm:text-3xl font-bold font-mono text-cyan-400">03 Series</div>
+          <div class="text-2xl text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+            <span class="text-emerald-400">✓</span> Peer & SSRN preprints
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual: 3D Mathematical Topology Preview -->
+      <div class="mt-14 max-w-4xl mx-auto relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-cyan-950/40">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#07090e] via-transparent to-transparent z-10"></div>
+        <img src="assets/brand/hero-manifold.jpg" alt="Syntropic Mathematical Manifold" class="w-full h-auto object-cover opacity-85 hover:scale-105 transition duration-700">
+        <div class="absolute bottom-4 left-6 right-6 z-20 flex flex-wrap items-center justify-between text-xs font-mono text-slate-300">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand-cyan"></span>
+            <span>TOPOLOGY: CALABI-YAU PHASE MANIFOLD $\mathcal{M}^{2n}$</span>
+          </div>
+          <div class="text-slate-500">INVARIANT: $\Omega = \sum dp_i \wedge dq_i$</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. ABOUT & PHILOSOPHY SECTION
+       ========================================================================= -->
+  <section id="about" class="py-24 border-t border-white/[0.06] bg-[#090c14] relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5">
+          <div class="font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">01 / FOUNDATIONAL PHILOSOPHY</div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-6">
+            From Thermodynamic Chaos to Pure Algorithmic Invariants.
+          </h2>
+          <p class="text-slate-300 leading-relaxed mb-6">
+            Traditional financial engineering assumes markets are ergodic, Gaussian, and frictionless. In real-world digital asset ecosystems, markets are non-ergodic, power-law distributed, and punctuated by sub-millisecond liquidity cascades.
+          </p>
+          <p class="text-slate-400 leading-relaxed mb-8">
+            <strong>Syntropy</strong> is the mathematical opposite of entropy—the spontaneous emergence of symmetry, predictability, and structure. At Syntropic Labs, we model order flow dynamics and liquidity pools through continuous-time differential geometry and stochastic optimal control.
+          </p>
+
+          <div class="flex items-center gap-4">
+            <div class="p-3 rounded-xl bg-slate-900 border border-white/10">
+              <i data-lucide="cpu" class="w-6 h-6 text-brand-cyan"></i>
+            </div>
+            <div>
+              <div class="text-white font-semibold">Zero-Heuristic Principles</div>
+              <div class="text-xs text-slate-400">Every strategy is backed by mathematical proofs and closed-form solutions.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="glass-panel p-6 rounded-2xl">
+              <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-brand-cyan mb-4 font-mono font-bold">
+                01
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Deterministic Execution</h3>
+              <p class="text-sm text-slate-400">
+                Sub-microsecond tick ingestion engines built in bare-metal Rust eliminating execution jitter, queue latency, and adverse selection.
+              </p>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl">
+              <div class="w-10 h-10 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-4 font-mono font-bold">
+                02
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Invariant Manifold Design</h3>
+              <p class="text-sm text-slate-400">
+                Custom bonding curves and concentrated liquidity formulas that mathematically eliminate Loss-Versus-Rebalancing (LVR) arbitrage.
+              </p>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl">
+              <div class="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4 font-mono font-bold">
+                03
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Non-Ergodic Risk Defense</h3>
+              <p class="text-sm text-slate-400">
+                Time-average growth optimization (Hill heavy-tail index) protecting capital from absorption barrier ruin in liquidation spirals.
+              </p>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4 font-mono font-bold">
+                04
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Agent-Based Tokenomics</h3>
+              <p class="text-sm text-slate-400">
+                Dynamical systems modeling of token flows and protocol emissions using differential equation simulations under macroeconomic shocks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. CORE QUANTITATIVE RESEARCH PILLARS (DEEP TECHNICAL SUBSTANCE)
+       ========================================================================= -->
+  <section id="research" class="py-24 border-t border-white/[0.06] bg-[#07090e] relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">02 / SCIENTIFIC ARCHITECTURE</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+          Core Quantitative Research Pillars
+        </h2>
+        <p class="text-slate-400 text-base">
+          Our research division develops theoretical advances and translates them into institutional-grade production algorithms.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Pillar 1: Optimal Execution -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/10 relative overflow-hidden group">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-brand-cyan border border-cyan-500/20">
+              PILLAR I · EXECUTION
+            </span>
+            <span class="font-mono text-xs text-slate-500">ALMGREN-CHRISS / HJB</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Continuous-Time Stochastic Optimal Execution</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            We formulate multi-asset inventory liquidation as a Hamilton-Jacobi-Bellman stochastic control problem. By incorporating transient price impact decay and real-time order flow toxicity, our algorithms maximize risk-adjusted implementation shortfall.
+          </p>
+
+          <div class="formula-box p-4 rounded-xl text-xs text-cyan-300 mb-6 overflow-x-auto">
+            $$\min_{v \in \mathcal{A}} \mathbb{E}\left[\int_0^T \left( \eta v_t^2 + \lambda \sigma^2 q_t^2 \right) dt + \gamma \int_0^T v_t q_t dt \right]$$
+          </div>
+
+          <ul class="space-y-2 text-xs text-slate-300 font-mono mb-6">
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-cyan"></i> Adaptive urgency factor $\kappa(t)$ calibrated to cross-venue depth</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-cyan"></i> Sub-tick order placement on high-frequency central order books</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-cyan"></i> 34.2% average slippage reduction vs static VWAP benchmarks</li>
+          </ul>
+
+          <button data-paper="paper-amm" class="trigger-paper-modal text-xs font-mono text-brand-cyan hover:underline flex items-center gap-1">
+            Read Formulation Preprint →
+          </button>
+        </div>
+
+        <!-- Pillar 2: Concentrated Liquidity Invariant Geometry -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/10 relative overflow-hidden group">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 rounded-full text-xs font-mono bg-sky-500/10 text-sky-400 border border-sky-500/20">
+              PILLAR II · INVARIANTS
+            </span>
+            <span class="font-mono text-xs text-slate-500">AMM CURVATURE & LVR</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Concentrated Invariant Geometry & LVR Elimination</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Automated market makers suffer from systematic wealth extraction by latency-advantaged arbitrageurs. We construct invariant surfaces with dynamic curvature and volatility-linked fee schedules $\gamma^*(\sigma, \Delta t)$ that neutralize toxic flow.
+          </p>
+
+          <div class="formula-box p-4 rounded-xl text-xs text-cyan-300 mb-6 overflow-x-auto">
+            $$dLVR_t = \frac{1}{8} \frac{\sigma_t^2 S_t L}{\sqrt{S_t}} dt \implies \gamma^*(\sigma_t) \ge \frac{1}{2} \sigma_t \sqrt{\Delta t_{\text{block}}}$$
+          </div>
+
+          <ul class="space-y-2 text-xs text-slate-300 font-mono mb-6">
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-sky-400"></i> Closed-form solutions for non-linear reserve manifolds</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-sky-400"></i> 92.4% empirical reduction in toxic latency rebalancing leakage</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-sky-400"></i> Active liquidity management with directional inventory tilt</li>
+          </ul>
+
+          <a href="research/whitepaper-amm-invariants.html" class="text-xs font-mono text-sky-400 hover:underline flex items-center gap-1">
+            Read Whitepaper 24-04 →
+          </a>
+        </div>
+
+        <!-- Pillar 3: Microstructure & Order Flow Imbalance -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/10 relative overflow-hidden group">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              PILLAR III · MICROSTRUCTURE
+            </span>
+            <span class="font-mono text-xs text-slate-500">LEVEL-3 TICK OFI & VPIN</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Order Flow Imbalance & Toxic Flow Discrimination</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            By analyzing microsecond book delta events across global centralized matching engines and decentralized pools, our models isolate informed institutional flow from high-frequency quoting noise.
+          </p>
+
+          <div class="formula-box p-4 rounded-xl text-xs text-indigo-300 mb-6 overflow-x-auto">
+            $$\text{VPIN} = \frac{\sum_{\tau=1}^N |V_\tau^B - V_\tau^S|}{N \cdot V}, \quad \text{OFI}_t = \Delta q_t^b \cdot \mathbb{I} - \Delta q_t^a \cdot \mathbb{I}$$
+          </div>
+
+          <ul class="space-y-2 text-xs text-slate-300 font-mono mb-6">
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-indigo-400"></i> Multi-level OFI vector projections across 5 levels of the book</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-indigo-400"></i> Cross-venue lead-lag estimation using Hawkes processes</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-indigo-400"></i> Real-time toxicity score fed directly to quotation spread engine</li>
+          </ul>
+
+          <a href="research/whitepaper-order-flow-microstructure.html" class="text-xs font-mono text-indigo-400 hover:underline flex items-center gap-1">
+            Read Whitepaper 24-08 →
+          </a>
+        </div>
+
+        <!-- Pillar 4: Non-Ergodic Capital Allocation & Tail Risk -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/10 relative overflow-hidden group">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              PILLAR IV · RISK DYNAMICS
+            </span>
+            <span class="font-mono text-xs text-slate-500">ERGODICITY & HEAVY TAILS</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3">Non-Ergodic Risk Architecture & Heavy Tails</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Traditional portfolio optimization maximizes ensemble average expectations, ignoring the fact that trading is a single-path time-average process. Our risk engine applies continuous fractional Kelly allocation constrained by extreme value theory.
+          </p>
+
+          <div class="formula-box p-4 rounded-xl text-xs text-emerald-300 mb-6 overflow-x-auto">
+            $$g_{\text{time}} = \lim_{T \to \infty} \frac{1}{T} \ln\left(\frac{W(T)}{W(0)}\right) = \mu - \frac{1}{2}\sigma^2 \implies p_{\text{ruin}} = 0$$
+          </div>
+
+          <ul class="space-y-2 text-xs text-slate-300 font-mono mb-6">
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Continuous CVaR computation with Hill tail-index calibration</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Non-linear liquidation cascade mitigation filters</li>
+            <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Preserved 98.7% equity across historic crypto volatility shocks</li>
+          </ul>
+
+          <a href="research/whitepaper-ergodic-risk.html" class="text-xs font-mono text-emerald-400 hover:underline flex items-center gap-1">
+            Read Whitepaper 25-01 →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. PROPRIETARY ENGINEERING & INFRASTRUCTURE STACK
+       ========================================================================= -->
+  <section id="infrastructure" class="py-24 border-t border-white/[0.06] bg-[#07090e] relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">03 / HIGH-PERFORMANCE COMPUTING</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+          Proprietary Infrastructure Stack
+        </h2>
+        <p class="text-slate-400 text-base">
+          From bare-metal execution nodes to hardware-accelerated stochastic simulation clusters.
+        </p>
+      </div>
+
+      <!-- Infrastructure Tabs Navigation -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+        <button data-tab="tab-rust" class="infra-tab-btn px-5 py-2.5 rounded-xl text-xs font-mono font-medium border border-cyan-400/40 bg-cyan-500/10 text-cyan-400 transition">
+          01. Rust Bare-Metal Engine
+        </button>
+        <button data-tab="tab-gpu" class="infra-tab-btn px-5 py-2.5 rounded-xl text-xs font-mono font-medium border border-transparent text-slate-400 hover:text-white transition">
+          02. GPU Stochastic Kernels
+        </button>
+        <button data-tab="tab-onchain" class="infra-tab-btn px-5 py-2.5 rounded-xl text-xs font-mono font-medium border border-transparent text-slate-400 hover:text-white transition">
+          03. Invariant Smart Contracts
+        </button>
+        <button data-tab="tab-data" class="infra-tab-btn px-5 py-2.5 rounded-xl text-xs font-mono font-medium border border-transparent text-slate-400 hover:text-white transition">
+          04. 12TB+ Tick Lakehouse
+        </button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-white/10">
+        <!-- Tab 1: Rust Engine -->
+        <div id="tab-rust" class="infra-tab-pane grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 space-y-4">
+            <div class="text-xs font-mono text-brand-cyan uppercase tracking-wider">SUB-MICROSECOND EXECUTION DAEMON</div>
+            <h3 class="text-2xl font-bold text-white">Zero-Allocation Rust Execution Pipeline</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Our core execution daemon is written in Rust, leveraging user-space DPDK network drivers for kernel bypass and lock-free Single Producer Single Consumer (SPSC) ring buffers.
+            </p>
+            <ul class="space-y-2 text-xs font-mono text-slate-400">
+              <li class="flex items-center gap-2"><span class="text-brand-cyan">▸</span> Mean tick-to-quote latency: <strong>820 nanoseconds</strong></li>
+              <li class="flex items-center gap-2"><span class="text-brand-cyan">▸</span> Zero dynamic heap allocations in hot-path order loops</li>
+              <li class="flex items-center gap-2"><span class="text-brand-cyan">▸</span> Native SIMD AVX-512 order book level projection</li>
+              <li class="flex items-center gap-2"><span class="text-brand-cyan">▸</span> Co-located across Equinix LD4 (London) & NY4 (New York)</li>
+            </ul>
+          </div>
+          <div class="lg:col-span-6 bg-slate-950 p-5 rounded-2xl border border-white/10 font-mono text-xs text-slate-300 overflow-x-auto">
+            <div class="text-slate-500 mb-2">// Hot-path execution loop sample</div>
+            <span class="text-cyan-400">pub struct</span> ExecutionKernel&lt;<span class="text-sky-300">'a</span>&gt; {<br>
+            &nbsp;&nbsp;ring_buffer: <span class="text-indigo-400">LockFreeSPSC</span>&lt;OrderTick, 65536&gt;,<br>
+            &nbsp;&nbsp;invariant_state: <span class="text-indigo-400">&amp;'a InvariantManifold</span>,<br>
+            }<br><br>
+            <span class="text-cyan-400">impl</span>&lt;<span class="text-sky-300">'a</span>&gt; ExecutionKernel&lt;<span class="text-sky-300">'a</span>&gt; {<br>
+            &nbsp;&nbsp;<span class="text-cyan-400">#[inline(always)]</span><br>
+            &nbsp;&nbsp;<span class="text-cyan-400">pub fn</span> evaluate_ofi_tick(&amp;<span class="text-cyan-400">mut</span> self, tick: &amp;OrderTick) -&gt; Action {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// Evaluated in 14 cycles using SIMD vector intrinsics</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-cyan-400">let</span> alpha = self.invariant_state.project_surface(tick.imbalance);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-cyan-400">if</span> alpha.abs() &gt; THRESHOLD { Action::Quote(alpha) } <span class="text-cyan-400">else</span> { Action::Hold }<br>
+            &nbsp;&nbsp;}<br>
+            }
+          </div>
+        </div>
+
+        <!-- Tab 2: GPU Kernels -->
+        <div id="tab-gpu" class="infra-tab-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 space-y-4">
+            <div class="text-xs font-mono text-sky-400 uppercase tracking-wider">HARDWARE ACCELERATION</div>
+            <h3 class="text-2xl font-bold text-white">CUDA & JAX Monte Carlo Simulation Engine</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              We simulate over 100,000 parallel continuous-time stochastic paths in seconds using custom CUDA C++ kernels and PyTorch/JAX distributed tensors.
+            </p>
+            <ul class="space-y-2 text-xs font-mono text-slate-400">
+              <li class="flex items-center gap-2"><span class="text-sky-400">▸</span> 100M+ synthetic order flow ticks simulated per batch</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">▸</span> GPU-accelerated calibration of Heston & Rough Volatility paths</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">▸</span> Dynamic portfolio Value-at-Risk under heavy-tail perturbations</li>
+            </ul>
+          </div>
+          <div class="lg:col-span-6 bg-slate-950 p-5 rounded-2xl border border-white/10 font-mono text-xs text-slate-300 overflow-x-auto">
+            <div class="text-slate-500 mb-2">// CUDA kernel execution</div>
+            <span class="text-sky-400">__global__ void</span> simulate_stochastic_manifold(<br>
+            &nbsp;&nbsp;<span class="text-cyan-400">float*</span> d_paths, <span class="text-cyan-400">float</span> mu, <span class="text-cyan-400">float</span> sigma, <span class="text-cyan-400">float</span> dt, <span class="text-cyan-400">int</span> N<br>
+            ) {<br>
+            &nbsp;&nbsp;<span class="text-cyan-400">int</span> tid = blockIdx.x * blockDim.x + threadIdx.x;<br>
+            &nbsp;&nbsp;<span class="text-cyan-400">float</span> cur_price = 100.0f;<br>
+            &nbsp;&nbsp;<span class="text-cyan-400">for</span> (<span class="text-cyan-400">int</span> t = 0; t &lt; N; t++) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-cyan-400">float</span> dw = curand_normal(&amp;state);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;cur_price *= __expf((mu - 0.5f * sigma * sigma) * dt + sigma * __sqrtf(dt) * dw);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;d_paths[tid * N + t] = cur_price;<br>
+            &nbsp;&nbsp;}<br>
+            }
+          </div>
+        </div>
+
+        <!-- Tab 3: Smart Contracts -->
+        <div id="tab-onchain" class="infra-tab-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 space-y-4">
+            <div class="text-xs font-mono text-indigo-400 uppercase tracking-wider">PROTOCOL LEVEL INTEGRATION</div>
+            <h3 class="text-2xl font-bold text-white">Yul & Solady Invariant Smart Contracts</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              On-chain liquidity mechanisms optimized in assembly Yul to reduce transaction gas consumption while dynamically locking in LVR arbitrage defense.
+            </p>
+            <ul class="space-y-2 text-xs font-mono text-slate-400">
+              <li class="flex items-center gap-2"><span class="text-indigo-400">▸</span> Gas-optimized concentrated pool invariant solvers</li>
+              <li class="flex items-center gap-2"><span class="text-indigo-400">▸</span> Private block builder integration avoiding toxic sandwich attacks</li>
+              <li class="flex items-center gap-2"><span class="text-indigo-400">▸</span> Formally verified with Certora and Halmos mathematical provers</li>
+            </ul>
+          </div>
+          <div class="lg:col-span-6 bg-slate-950 p-5 rounded-2xl border border-white/10 font-mono text-xs text-slate-300 overflow-x-auto">
+            <div class="text-slate-500 mb-2">// Invariant fee settlement</div>
+            <span class="text-indigo-400">function</span> computeOptimalFee(<br>
+            &nbsp;&nbsp;<span class="text-cyan-400">uint256</span> currentVolatility,<br>
+            &nbsp;&nbsp;<span class="text-cyan-400">int256</span> orderFlowImbalance<br>
+            ) <span class="text-indigo-400">internal pure returns</span> (<span class="text-cyan-400">uint24</span> feeTier) {<br>
+            &nbsp;&nbsp;<span class="text-indigo-400">assembly</span> {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-500">// Fixed-point invariant arithmetic</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-cyan-400">let</span> baseFee := div(mul(currentVolatility, 100), 10000)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;feeTier := add(baseFee, sar(2, orderFlowImbalance))<br>
+            &nbsp;&nbsp;}<br>
+            }
+          </div>
+        </div>
+
+        <!-- Tab 4: Lakehouse -->
+        <div id="tab-data" class="infra-tab-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 space-y-4">
+            <div class="text-xs font-mono text-emerald-400 uppercase tracking-wider">HISTORICAL RESEARCH LAKEHOUSE</div>
+            <h3 class="text-2xl font-bold text-white">12TB+ High-Frequency Tick Data Lakehouse</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Every level-3 limit order book update, trade, and on-chain swap event across 18 major exchanges indexed with microsecond timestamps into Apache Arrow and Parquet format.
+            </p>
+            <ul class="space-y-2 text-xs font-mono text-slate-400">
+              <li class="flex items-center gap-2"><span class="text-emerald-400">▸</span> Lossless tick reconstruction from 2021 to Present</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">▸</span> Automated lead-lag cross-correlation query engine</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">▸</span> Direct pipeline to backtesting cluster via memory-mapped IO</li>
+            </ul>
+          </div>
+          <div class="lg:col-span-6 bg-slate-950 p-5 rounded-2xl border border-white/10 font-mono text-xs text-slate-300 overflow-x-auto">
+            <div class="text-slate-500 mb-2">// Tick data lakehouse schema</div>
+            Schema: L3OrderBookTickEvent {<br>
+            &nbsp;&nbsp;timestamp_ns: <span class="text-emerald-400">u64</span> (microsecond atomic),<br>
+            &nbsp;&nbsp;exchange_id: <span class="text-emerald-400">u16</span> [Binance, Coinbase, Bybit, DEX],<br>
+            &nbsp;&nbsp;bids: <span class="text-cyan-400">[(FixedPrice, FixedQty); 10]</span>,<br>
+            &nbsp;&nbsp;asks: <span class="text-cyan-400">[(FixedPrice, FixedQty); 10]</span>,<br>
+            &nbsp;&nbsp;vpin_score: <span class="text-emerald-400">f32</span>,<br>
+            &nbsp;&nbsp;lvr_arbitrage_opportunity: <span class="text-emerald-400">bool</span><br>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. WORKING PAPERS & PUBLICATIONS REPOSITORY
+       ========================================================================= -->
+  <section id="papers" class="py-24 border-t border-white/[0.06] bg-[#090c14] relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <div class="font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">04 / RESEARCH PUBLICATIONS</div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Working Papers & Preprints
+          </h2>
+        </div>
+        <p class="text-slate-400 text-sm max-w-md mt-4 md:mt-0">
+          Selected theoretical monographs and research publications produced by our quantitative research and engineering group.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Paper 1 -->
+        <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 hover:border-brand-cyan/40 transition">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div class="space-y-2 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded text-[11px] font-mono bg-cyan-500/10 text-brand-cyan border border-cyan-500/30">
+                  WORKING PAPER 24-04
+                </span>
+                <span class="text-xs font-mono text-slate-500">SSRN / Q-FIN.TR · JUNE 2024</span>
+              </div>
+              <h3 class="text-xl font-bold text-white hover:text-brand-cyan transition">
+                Invariant Surface Dynamics in Concentrated Liquidity: Eliminating Loss-Versus-Rebalancing in Non-Linear AMMs
+              </h3>
+              <p class="text-xs text-slate-400 font-mono">
+                Syntropic Research Group (Lead: Co-Founder & Quantitative Research Director)
+              </p>
+              <p class="text-sm text-slate-300 line-clamp-2">
+                Continuous-time stochastic control framework for automated market makers. Derives optimal dynamic fee schedule $\gamma^*(\sigma, t)$ neutralizing toxic latency arbitrage without impeding uninformed flow.
+              </p>
+            </div>
+
+            <div class="flex sm:flex-col gap-3 shrink-0">
+              <button data-paper="paper-amm" class="trigger-paper-modal px-4 py-2.5 rounded-lg text-xs font-mono font-medium bg-slate-800 hover:bg-slate-700 text-white border border-white/10 transition flex items-center justify-center gap-1.5">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-brand-cyan"></i> Read Abstract
+              </button>
+              <a href="research/whitepaper-amm-invariants.html" class="px-4 py-2.5 rounded-lg text-xs font-mono font-semibold bg-brand-cyan hover:bg-white text-black transition flex items-center justify-center gap-1.5">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> Full Paper
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 2 -->
+        <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 hover:border-brand-cyan/40 transition">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div class="space-y-2 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded text-[11px] font-mono bg-sky-500/10 text-sky-400 border border-sky-500/30">
+                  WORKING PAPER 24-08
+                </span>
+                <span class="text-xs font-mono text-slate-500">SSRN / Q-FIN.CP · OCTOBER 2024</span>
+              </div>
+              <h3 class="text-xl font-bold text-white hover:text-sky-300 transition">
+                High-Frequency Order Flow Imbalance and Cross-Venue Price Discovery in Fragmented Crypto Microstructures
+              </h3>
+              <p class="text-xs text-slate-400 font-mono">
+                Syntropic Quantitative Research Labs
+              </p>
+              <p class="text-sm text-slate-300 line-clamp-2">
+                Multi-venue microsecond econometric analysis across centralized matching engines and decentralized pools isolating lead-lag latency arbitrage channels.
+              </p>
+            </div>
+
+            <div class="flex sm:flex-col gap-3 shrink-0">
+              <button data-paper="paper-orderflow" class="trigger-paper-modal px-4 py-2.5 rounded-lg text-xs font-mono font-medium bg-slate-800 hover:bg-slate-700 text-white border border-white/10 transition flex items-center justify-center gap-1.5">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-sky-400"></i> Read Abstract
+              </button>
+              <a href="research/whitepaper-order-flow-microstructure.html" class="px-4 py-2.5 rounded-lg text-xs font-mono font-semibold bg-sky-400 hover:bg-white text-black transition flex items-center justify-center gap-1.5">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> Full Paper
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 3 -->
+        <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 hover:border-brand-cyan/40 transition">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div class="space-y-2 flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded text-[11px] font-mono bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
+                  WORKING PAPER 25-01
+                </span>
+                <span class="text-xs font-mono text-slate-500">PREPRINT · JANUARY 2025</span>
+              </div>
+              <h3 class="text-xl font-bold text-white hover:text-indigo-300 transition">
+                Non-Ergodic Risk Architecture: Continuous-Time Tail-Risk Hedging and Capital Growth Under Heavy Tails
+              </h3>
+              <p class="text-xs text-slate-400 font-mono">
+                Syntropic Labs Risk Engineering & Mathematical Physics Team
+              </p>
+              <p class="text-sm text-slate-300 line-clamp-2">
+                Formal proof demonstrating that ensemble-average optimization guarantees bankruptcy in power-law markets. Formulates fractional Kelly allocation with ruin barrier invariance.
+              </p>
+            </div>
+
+            <div class="flex sm:flex-col gap-3 shrink-0">
+              <button data-paper="paper-ergodic" class="trigger-paper-modal px-4 py-2.5 rounded-lg text-xs font-mono font-medium bg-slate-800 hover:bg-slate-700 text-white border border-white/10 transition flex items-center justify-center gap-1.5">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-indigo-400"></i> Read Abstract
+              </button>
+              <a href="research/whitepaper-ergodic-risk.html" class="px-4 py-2.5 rounded-lg text-xs font-mono font-semibold bg-indigo-400 hover:bg-white text-black transition flex items-center justify-center gap-1.5">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> Full Paper
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. INSTITUTIONAL SOLUTIONS & ADVISORY
+       ========================================================================= -->
+  <section id="solutions" class="py-24 border-t border-white/[0.06] bg-[#07090e] relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">05 / INSTITUTIONAL ADVISORY</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+          Client Solutions & Capital Mandates
+        </h2>
+        <p class="text-slate-400 text-base">
+          Bridging mathematical rigor with tier-1 digital asset ecosystems, funds, and institutional allocators.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Solution 1 -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-brand-cyan mb-6">
+              <i data-lucide="trending-up" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Quantitative Asset Management</h3>
+            <p class="text-sm text-slate-400 leading-relaxed mb-6">
+              Market-neutral systematic alpha strategies deploying multi-venue statistical arbitrage, latency-hedged market making, and order flow momentum.
+            </p>
+            <ul class="space-y-2 text-xs font-mono text-slate-300">
+              <li class="flex items-center gap-2"><span class="text-brand-cyan">✓</span> Zero directional market beta</li>
+              <li class="flex items-center gap-2"><span class="text-brand-cyan">✓</span> Sub-millisecond execution routing</li>
+              <li class="flex items-center gap-2"><span class="text-brand-cyan">✓</span> Fully segregated custodian integration</li>
+            </ul>
+          </div>
+          <button class="trigger-contact mt-8 w-full py-2.5 text-xs font-mono text-center text-brand-cyan border border-cyan-500/30 rounded-xl hover:bg-cyan-500/10 transition">
+            Request Strategy Deck →
+          </button>
+        </div>
+
+        <!-- Solution 2 -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-6">
+              <i data-lucide="layers" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Protocol Tokenomics & System Dynamics</h3>
+            <p class="text-sm text-slate-400 leading-relaxed mb-6">
+              Mathematical modeling and stress-testing of protocol economies. Agent-based simulation of staking yields, emissions, bonding curves, and extreme liquidation scenarios.
+            </p>
+            <ul class="space-y-2 text-xs font-mono text-slate-300">
+              <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Differential equation stability proofs</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Black swan liquidation cascade testing</li>
+              <li class="flex items-center gap-2"><span class="text-sky-400">✓</span> Institutional whitepaper co-authoring</li>
+            </ul>
+          </div>
+          <button class="trigger-contact mt-8 w-full py-2.5 text-xs font-mono text-center text-sky-400 border border-sky-500/30 rounded-xl hover:bg-sky-500/10 transition">
+            Schedule Protocol Advisory →
+          </button>
+        </div>
+
+        <!-- Solution 3 -->
+        <div class="glass-panel p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6">
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Liquidity Architecture & AMM Design</h3>
+            <p class="text-sm text-slate-400 leading-relaxed mb-6">
+              Engineering bespoke on-chain market making formulas, LVR-eliminating fee curves, and algorithmic inventory rebalancing for decentralized exchanges.
+            </p>
+            <ul class="space-y-2 text-xs font-mono text-slate-300">
+              <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> Bespoke invariant surface solvers</li>
+              <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> MEV-resistant block-relay routing</li>
+              <li class="flex items-center gap-2"><span class="text-indigo-400">✓</span> Dynamic volatility spread indexing</li>
+            </ul>
+          </div>
+          <button class="trigger-contact mt-8 w-full py-2.5 text-xs font-mono text-center text-indigo-400 border border-indigo-500/30 rounded-xl hover:bg-indigo-500/10 transition">
+            Liquidity Consultation →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. LEADERSHIP & FOUNDER SHOWCASE (CV READY)
+       ========================================================================= -->
+  <section id="team" class="py-24 border-t border-white/[0.06] bg-[#090c14] relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">06 / LEADERSHIP & GOVERNANCE</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+          Leadership & Quantitative Research
+        </h2>
+        <p class="text-slate-400 text-base">
+          Syntropic Labs combines academic rigor in mathematical physics and financial engineering with low-latency algorithmic execution systems.
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <!-- Founder Profile Card -->
+        <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-brand-cyan/40 bg-slate-900/60 relative overflow-hidden group shadow-2xl shadow-cyan-950/40">
+          <div class="absolute top-0 right-0 p-6">
+            <span class="px-3 py-1 text-[10px] sm:text-xs font-mono bg-cyan-500/20 text-brand-cyan rounded-full border border-cyan-500/30 font-semibold tracking-wide">
+              FOUNDER & PRINCIPAL
+            </span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-6">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-cyan to-brand-blue flex items-center justify-center text-black font-extrabold font-mono text-2xl shadow-lg shadow-cyan-500/20 shrink-0">
+              TA
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-1">Tarik Akarli</h3>
+              <div class="text-xs sm:text-sm font-mono text-brand-cyan">Founder & Head of Quantitative Strategy · Syntropic Labs</div>
+            </div>
+          </div>
+
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">
+            Leading the quantitative research agenda, proprietary execution architectures, and mathematical modeling at Syntropic Labs. Specializes in continuous-time stochastic control, AMM invariant curvature, and high-frequency microstructure econometric models.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/10 py-5 text-xs font-mono text-slate-400 mb-6">
+            <div><strong class="text-white">Focus:</strong> Stochastic Control, LVR Elimination, OFI</div>
+            <div><strong class="text-white">Credentials:</strong> Quantitative Finance & Applied Mathematics</div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2 text-xs font-mono">
+            <a href="https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=13379448" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-brand-cyan transition flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-950/80 border border-white/10 hover:border-cyan-500/50 shadow-sm">
+              <i data-lucide="book-open" class="w-4 h-4 text-brand-cyan"></i> SSRN Author
+            </a>
+            <a href="https://www.linkedin.com/in/tarik-akarli-92688528b/" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-brand-cyan transition flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-950/80 border border-white/10 hover:border-cyan-500/50 shadow-sm">
+              <i data-lucide="linkedin" class="w-4 h-4 text-brand-cyan"></i> LinkedIn
+            </a>
+            <a href="https://github.com/enhayi" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-brand-cyan transition flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-950/80 border border-white/10 hover:border-cyan-500/50 shadow-sm">
+              <i data-lucide="github" class="w-4 h-4 text-brand-cyan"></i> GitHub
+            </a>
+            <a href="https://enhayi.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-brand-cyan transition flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-950/80 border border-white/10 hover:border-cyan-500/50 shadow-sm">
+              <i data-lucide="globe" class="w-4 h-4 text-brand-cyan"></i> Portfolio Website
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       11. CONTACT & COLLABORATION SECTION
+       ========================================================================= -->
+  <section id="contact" class="py-24 border-t border-white/[0.06] bg-gradient-to-b from-[#090c14] to-[#07090e] relative text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono mb-6">
+        COLLABORATION & RESEARCH INQUIRIES
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-6">
+        Connect with Syntropic Labs
+      </h2>
+      <p class="text-slate-400 text-base max-w-2xl mx-auto mb-10">
+        For quantitative research collaborations, protocol mechanism design, or institutional inquiries, reach out directly to our principal desk.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button class="trigger-contact px-8 py-4 text-sm font-semibold text-black bg-brand-cyan hover:bg-white rounded-xl transition duration-200 shadow-xl shadow-cyan-950/60 flex items-center gap-2">
+          <i data-lucide="mail" class="w-4 h-4"></i> Contact Us
+        </button>
+        <a href="mailto:akarliburak@gmail.com" class="px-8 py-4 text-sm font-mono text-cyan-300 bg-slate-900/80 border border-cyan-500/30 hover:border-cyan-400 rounded-xl transition flex items-center gap-2 shadow-lg shadow-black/40">
+          <i data-lucide="send" class="w-4 h-4 text-brand-cyan"></i> akarliburak@gmail.com
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       12. FOOTER & COMPREHENSIVE DISCLOSURES
+       ========================================================================= -->
+  <footer class="border-t border-white/[0.06] bg-[#05070a] py-16 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-10 mb-12">
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-slate-900 border border-white/10 p-1 flex items-center justify-center">
+              <img src="assets/brand/logo.svg" alt="Syntropic Labs" class="w-full h-full object-contain">
+            </div>
+            <span class="font-bold text-white tracking-wider text-base">SYNTROPIC LABS</span>
+          </div>
+          <p class="text-slate-500 leading-relaxed text-xs max-w-sm">
+            Quantitative Research, Microstructure Engineering & Decentralized Mathematical Invariants.
+          </p>
+          <div class="font-mono text-slate-500 text-[11px] space-y-1">
+            <div><!-- address space --></div>
+            <div><!-- address space --></div>
+            <div><!-- address space --></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-white font-semibold font-mono text-xs uppercase mb-4">Research</div>
+          <ul class="space-y-2.5">
+            <li><a href="#research" class="hover:text-brand-cyan transition">Stochastic Control</a></li>
+            <li><a href="#research" class="hover:text-brand-cyan transition">Invariant Surfaces</a></li>
+            <li><a href="#research" class="hover:text-brand-cyan transition">Order Flow Imbalance</a></li>
+            <li><a href="#research" class="hover:text-brand-cyan transition">Ergodicity Economics</a></li>
+            <li><a href="#papers" class="hover:text-brand-cyan transition">Working Papers</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-white font-semibold font-mono text-xs uppercase mb-4">Infrastructure</div>
+          <ul class="space-y-2.5">
+            <li><a href="#infrastructure" class="hover:text-brand-cyan transition">Rust Execution Core</a></li>
+            <li><a href="#infrastructure" class="hover:text-brand-cyan transition">CUDA Monte Carlo</a></li>
+            <li><a href="#infrastructure" class="hover:text-brand-cyan transition">Yul Smart Invariants</a></li>
+            <li><a href="#infrastructure" class="hover:text-brand-cyan transition">Tick Lakehouse</a></li>
+            <li><a href="#infrastructure" class="hover:text-brand-cyan transition">FPGA Feed Handlers</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="text-white font-semibold font-mono text-xs uppercase mb-4">Connect</div>
+          <ul class="space-y-2.5">
+            <li><button class="trigger-contact hover:text-brand-cyan transition text-left">Contact Us</button></li>
+            <li><a href="mailto:akarliburak@gmail.com" class="hover:text-brand-cyan transition font-mono text-cyan-400">akarliburak@gmail.com</a></li>
+            <li><button class="trigger-contact hover:text-brand-cyan transition text-left">Protocol Advisory</button></li>
+            <li><button class="trigger-contact hover:text-brand-cyan transition text-left">Liquidity Mandates</button></li>
+            <li><a href="#team" class="hover:text-brand-cyan transition">Leadership</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Institutional Legal Disclaimer -->
+      <div class="border-t border-white/[0.06] pt-8 text-[11px] text-slate-600 leading-relaxed space-y-3">
+        <p>
+          <strong>Institutional Notice & Regulatory Disclaimer:</strong> Syntropic Labs Ltd. operates as a specialized quantitative research, software engineering, and mathematical technology laboratory. The contents of this portal and associated working papers are intended exclusively for institutional allocators, sophisticated counterparties, and technology partners for informational and mathematical research purposes.
+        </p>
+        <p>
+          Nothing on this website constitutes an offer to buy or sell securities, commodities, futures, or digital assets, nor does it constitute investment, tax, or legal advice. Simulated backtested performance results do not guarantee future returns.
+        </p>
+        <div class="flex flex-wrap items-center justify-between text-slate-500 pt-4 font-mono text-[10px]">
+          <div>© 2024–2026 Syntropic Labs Ltd. All rights reserved.</div>
+          <div class="flex gap-4">
+            <span class="hover:text-slate-300 cursor-pointer">Terms of Engagement</span>
+            <span class="hover:text-slate-300 cursor-pointer">Security Audits</span>
+            <span class="hover:text-slate-300 cursor-pointer">System Status</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODAL 1: CONTACT US / INQUIRY MODAL
+       ========================================================================= -->
+  <div id="modalOverlay" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 modal-overlay">
+    
+    <!-- Contact Us Modal Window -->
+    <div id="contactModal" class="glass-card-static bg-[#090d16] border border-cyan-500/30 rounded-3xl max-w-lg w-full p-8 modal-content shadow-2xl relative">
+      <button class="modal-close-trigger absolute top-6 right-6 text-slate-400 hover:text-white p-1">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-2 mb-2 font-mono text-xs text-brand-cyan">
+        <span class="w-2 h-2 rounded-full bg-brand-cyan"></span>
+        <span>GET IN TOUCH</span>
+      </div>
+      <h3 class="text-2xl font-bold text-white mb-2">Contact Syntropic Labs</h3>
+      <p class="text-xs text-slate-400 mb-4">
+        Reach out for quantitative research inquiries, protocol collaborations, or direct consultation.
+      </p>
+
+      <!-- Direct Email Quick Card -->
+      <div class="mb-5 p-3 rounded-xl bg-slate-950/80 border border-cyan-500/20 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-cyan-500/10 flex items-center justify-center text-brand-cyan">
+            <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-mono text-slate-400 uppercase">Direct Email</div>
+            <a href="mailto:akarliburak@gmail.com" class="text-xs font-mono font-medium text-cyan-300 hover:underline">akarliburak@gmail.com</a>
+          </div>
+        </div>
+        <a href="mailto:akarliburak@gmail.com" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition flex items-center gap-1">
+          <i data-lucide="send" class="w-3 h-3"></i> Open Mail
+        </a>
+      </div>
+
+      <form id="contactForm" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Your Name</label>
+          <input id="contactName" type="text" required placeholder="e.g. Dr. Alexander Wright" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-cyan font-sans">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Your Email</label>
+          <input id="contactEmail" type="email" required placeholder="name@organization.com" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-cyan font-sans">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Organization / Subject</label>
+          <input id="contactSubject" type="text" required placeholder="e.g. Quant Research / Protocol Advisory Inquiry" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-cyan font-sans">
+        </div>
+
+        <div>
+          <label class="block text-xs font-mono text-slate-300 mb-1">Message</label>
+          <textarea id="contactMessage" rows="3" required placeholder="Please outline your inquiry or discussion topics..." class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-cyan font-sans resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3 mt-1 text-sm font-semibold font-mono text-black bg-brand-cyan hover:bg-white rounded-xl transition shadow-lg shadow-cyan-950/40 flex items-center justify-center gap-2">
+          <i data-lucide="send" class="w-4 h-4"></i> Send Message to akarliburak@gmail.com
+        </button>
+      </form>
+
+      <!-- Success State -->
+      <div id="contactSuccessState" class="hidden text-center py-8 space-y-3">
+        <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
+          <i data-lucide="check" class="w-6 h-6"></i>
+        </div>
+        <h4 class="text-lg font-bold text-white">Message Dispatched</h4>
+        <p class="text-xs text-slate-300 max-w-sm mx-auto">
+          Your message has been addressed to <strong class="text-cyan-400">akarliburak@gmail.com</strong>. We will review and respond promptly.
+        </p>
+      </div>
+    </div>
+
+    <!-- Paper Details Modal Window -->
+    <div id="paperModal" class="glass-card-static bg-[#090d16] border border-cyan-500/30 rounded-3xl max-w-2xl w-full p-8 modal-content shadow-2xl relative hidden max-h-[90vh] overflow-y-auto">
+      <button class="modal-close-trigger absolute top-6 right-6 text-slate-400 hover:text-white p-1">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div id="modalPaperMeta" class="text-xs font-mono text-brand-cyan mb-2">
+        Syntropic Research Group · Working Paper
+      </div>
+      <h3 id="modalPaperTitle" class="text-2xl font-bold text-white mb-4 leading-snug">
+        Working Paper Title
+      </h3>
+
+      <div id="modalPaperTags" class="flex flex-wrap gap-2 mb-6">
+        <!-- Injected via JS -->
+      </div>
+
+      <div class="border-t border-white/10 pt-4 mb-6">
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">EXECUTIVE ABSTRACT</div>
+        <p id="modalPaperAbstract" class="text-sm text-slate-300 leading-relaxed bg-slate-950/60 p-4 rounded-xl border border-white/5 italic">
+          Abstract content...
+        </p>
+      </div>
+
+      <div class="mb-6">
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">KEY MATHEMATICAL FORMULATIONS</div>
+        <div id="modalPaperFormulas" class="space-y-2">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-4 border-t border-white/10">
+        <button class="modal-close-trigger px-4 py-2 rounded-lg text-xs font-mono text-slate-400 hover:text-white">
+          Close Window
+        </button>
+        <a id="modalPaperFullLink" href="#" class="px-5 py-2.5 rounded-xl text-xs font-mono font-semibold bg-brand-cyan hover:bg-white text-black transition flex items-center gap-1.5">
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Open Full Monograph
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="assets/js/manifold-canvas.js"></script>
+  <script src="assets/js/live-ticker.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
