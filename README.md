@@ -2,6 +2,9 @@
 
 > **"Engineering Order from Market Entropy."**
 
+🌐 **Live Website**: [https://enhayi.github.io/syntropic-labs/](https://enhayi.github.io/syntropic-labs/)  
+📁 **GitHub Repository**: [https://github.com/enhayi/syntropic-labs](https://github.com/enhayi/syntropic-labs)
+
 Syntropic Labs is an institutional quantitative research and algorithmic infrastructure startup designed to bridge continuous-time stochastic calculus, proprietary automated market maker (AMM) invariant surface geometry, and sub-microsecond low-latency execution systems across global digital asset venues.
 
 ---
